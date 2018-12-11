@@ -40,6 +40,23 @@ arraysAnswers = {
   },
 
   /**
+   * Manipulating the original version of arr but excluding item
+   * 
+   * @param {Number[]} arr - An array of numbers
+   * @param {Number} item - A number to be excluded from the new array
+   * @returns {Number[]} The old array containing all numbers from arr except item.
+   */
+  removeWithoutCopy: function(arr, item) {
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i] === item) {
+        arr.splice(i, 1);
+        i--;
+      }
+    }
+    return arr;
+  },
+
+  /**
    * Adds a number, item, to the end of an array, arr.
    * 
    * @param {Number[]} arr - An array of numbers
