@@ -17,7 +17,27 @@ recursionAnswers = {
    * @returns {Number[]} The files under the directory dirName, including subdiretories.
    */
   listFiles: function listFiles(data, dirName) {
+    var listOfFiles = [];
+    var found = false;
+    
+    function processDir(dir) {
+      if (dirName === dir.dirName) {
+        listOfFiles = dir.files;
+        found = true;
+        dir.subDirs.forEach(dirs => {
+          processDir(dirs);
+        })
+      } else {
+        listOfFiles = [...listOfFiles, ...dir.files];
+      }
+      
+      dir.subDirs.forEach(dirs => {
+        if (!found) processDir(dirs);
+      });
+    }
 
+    processDir(data);
+    return listOfFiles;
   },
 
   /**
@@ -30,6 +50,6 @@ recursionAnswers = {
    * @returns {Number} The nth fibonacci number
    */
   fibonacci: function fibonacci(n) {
-
+    return n < 2 ? n: fibonacci(n-1) + fibonacci(n-2);
   },
 };
